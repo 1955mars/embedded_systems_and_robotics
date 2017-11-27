@@ -1,0 +1,16 @@
+#include<avr/io.h>
+#include<util/delay.h>
+#include<string.h>
+#include<mars/lcd.h>
+main()
+{
+	lcdstr();
+	DDRD=0xFF;
+	divcmd(0x01);
+	divcmd(0x82);
+	while(1)
+	{
+		divdata('A');
+		_delay_ms(1000);
+	}
+}

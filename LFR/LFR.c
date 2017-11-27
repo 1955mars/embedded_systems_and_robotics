@@ -1,0 +1,32 @@
+#include<avr/io.h>
+#include<util/delay.h>
+#include<string.h>
+#include<mars/lcd.h>
+main()
+{
+	DDRA=0xFC;
+	DDRB=0xFF;
+	while(1)
+	{
+		if(PINA==3)
+		{
+			PORTB=5;
+			_delay_ms(10);
+		}
+		if(PINA==1)
+		{
+			PORTB=1;
+			_delay_ms(10);
+		}
+		if(PINA==2)
+		{
+			PORTB=4;
+			_delay_ms(10);
+		}
+		if(PINA==0) 
+		{
+			PORTB=0;
+			break;
+		}
+	}
+}

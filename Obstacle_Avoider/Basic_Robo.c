@@ -1,0 +1,61 @@
+#include<avr/io.h>
+#include<util/delay.h>
+#include<string.h>
+#include<mars/lcd.h>
+void main()
+{
+	DDRD=0xFF;
+	lcdstr();
+	DDRB=0xFF;
+	DDRA=0xFC;
+	while(1)
+	{
+		if(PINA==0)
+		{
+			divcmd(0x01);
+			while(PINA==0)
+			{	
+				PORTB=5;
+				disp_string("Moving_Front",0x81);
+				disp_string("NO OBSTACLE",0xc1);
+				_delay_ms(100);
+			}
+		}
+		if(PINA==1)
+		{
+			divcmd(0x01);
+			while(PINA==1)
+			{
+				PORTB=1;
+				disp_string("Moving_Left",0x81);
+				disp_string("OBSTACLE_RIGHT",0xc1);
+				_delay_ms(100);
+			}
+		}
+		if(PINA==2)
+		{	
+			divcmd(0x01);
+			while(PINA==2)
+			{
+				PORTB=4;
+				disp_string("Moving_Right",0x81);
+				disp_string("OBSTACLE_LEFT",0xc1);
+				_delay_ms(100);
+			}
+		}
+		if(PINA==3)
+		{
+			divcmd(0x01);
+			while(PINA==3)
+			{
+				PORTB=0x0a;
+				disp_string("Moving_Back",0x81);
+				disp_string("OBSTACLE_STRT",0xc1);
+				_delay_ms(100);
+			}
+		
+		}
+		
+
+	}
+}

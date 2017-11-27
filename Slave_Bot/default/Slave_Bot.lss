@@ -1,0 +1,898 @@
+
+Slave_Bot.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000044e  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000080  00800060  0000044e  000004c2  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .debug_aranges 00000020  00000000  00000000  00000542  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_pubnames 0000008e  00000000  00000000  00000562  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_info   0000059d  00000000  00000000  000005f0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 0000018e  00000000  00000000  00000b8d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   00000505  00000000  00000000  00000d1b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_frame  000000a0  00000000  00000000  00001220  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_str    0000014e  00000000  00000000  000012c0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_loc    0000048e  00000000  00000000  0000140e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 000001b0  00000000  00000000  0000189c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ee e4       	ldi	r30, 0x4E	; 78
+  68:	f4 e0       	ldi	r31, 0x04	; 4
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <.do_copy_data_start>
+
+0000006c <.do_copy_data_loop>:
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+
+00000070 <.do_copy_data_start>:
+  70:	a0 3e       	cpi	r26, 0xE0	; 224
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <.do_copy_data_loop>
+
+00000076 <__do_clear_bss>:
+  76:	10 e0       	ldi	r17, 0x00	; 0
+  78:	a0 ee       	ldi	r26, 0xE0	; 224
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a0 3e       	cpi	r26, 0xE0	; 224
+  82:	b1 07       	cpc	r27, r17
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 ea 00 	call	0x1d4	; 0x1d4 <main>
+  8a:	0c 94 25 02 	jmp	0x44a	; 0x44a <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <sendcmd>:
+	senddata(b&0xF0);//First 4 bits
+	senddata((b<<4)&0xF0);//Next 4
+	_delay_ms(1);
+}
+void sendcmd(int c)
+{
+  92:	85 bb       	out	0x15, r24	; 21
+	PORTC=c;
+	PORTC+=4;
+  94:	85 b3       	in	r24, 0x15	; 21
+  96:	8c 5f       	subi	r24, 0xFC	; 252
+  98:	85 bb       	out	0x15, r24	; 21
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+  9a:	8a ef       	ldi	r24, 0xFA	; 250
+  9c:	90 e0       	ldi	r25, 0x00	; 0
+  9e:	01 97       	sbiw	r24, 0x01	; 1
+  a0:	f1 f7       	brne	.-4      	; 0x9e <sendcmd+0xc>
+	_delay_ms(1);
+	PORTC-=4;
+  a2:	85 b3       	in	r24, 0x15	; 21
+  a4:	84 50       	subi	r24, 0x04	; 4
+  a6:	85 bb       	out	0x15, r24	; 21
+}
+  a8:	08 95       	ret
+
+000000aa <divcmd>:
+	divcmd(0x28);//4 bit mode
+	divcmd(0x06);//Increment Mode
+	divcmd(0x0c);//Display on cursor off
+}
+void divcmd(int b)
+{
+  aa:	0f 93       	push	r16
+  ac:	1f 93       	push	r17
+  ae:	8c 01       	movw	r16, r24
+	sendcmd(b&0xF0);//First 4 bits
+  b0:	80 7f       	andi	r24, 0xF0	; 240
+  b2:	90 70       	andi	r25, 0x00	; 0
+  b4:	0e 94 49 00 	call	0x92	; 0x92 <sendcmd>
+	sendcmd((b<<4)&0xF0);//Next 4
+  b8:	84 e0       	ldi	r24, 0x04	; 4
+  ba:	00 0f       	add	r16, r16
+  bc:	11 1f       	adc	r17, r17
+  be:	8a 95       	dec	r24
+  c0:	e1 f7       	brne	.-8      	; 0xba <divcmd+0x10>
+  c2:	c8 01       	movw	r24, r16
+  c4:	90 70       	andi	r25, 0x00	; 0
+  c6:	0e 94 49 00 	call	0x92	; 0x92 <sendcmd>
+  ca:	8a ef       	ldi	r24, 0xFA	; 250
+  cc:	90 e0       	ldi	r25, 0x00	; 0
+  ce:	01 97       	sbiw	r24, 0x01	; 1
+  d0:	f1 f7       	brne	.-4      	; 0xce <divcmd+0x24>
+	_delay_ms(1);
+}
+  d2:	1f 91       	pop	r17
+  d4:	0f 91       	pop	r16
+  d6:	08 95       	ret
+
+000000d8 <lcdstr>:
+void lcdstr(void)
+{
+  d8:	82 e0       	ldi	r24, 0x02	; 2
+  da:	90 e0       	ldi	r25, 0x00	; 0
+  dc:	0e 94 55 00 	call	0xaa	; 0xaa <divcmd>
+	divcmd(0x02);//Home position Initialization with dividing function
+	divcmd(0x28);//4 bit mode
+  e0:	88 e2       	ldi	r24, 0x28	; 40
+  e2:	90 e0       	ldi	r25, 0x00	; 0
+  e4:	0e 94 55 00 	call	0xaa	; 0xaa <divcmd>
+	divcmd(0x06);//Increment Mode
+  e8:	86 e0       	ldi	r24, 0x06	; 6
+  ea:	90 e0       	ldi	r25, 0x00	; 0
+  ec:	0e 94 55 00 	call	0xaa	; 0xaa <divcmd>
+	divcmd(0x0c);//Display on cursor off
+  f0:	8c e0       	ldi	r24, 0x0C	; 12
+  f2:	90 e0       	ldi	r25, 0x00	; 0
+  f4:	0e 94 55 00 	call	0xaa	; 0xaa <divcmd>
+}
+  f8:	08 95       	ret
+
+000000fa <senddata>:
+	PORTC+=4;
+	_delay_ms(1);
+	PORTC-=4;
+}
+void senddata(int c)
+{
+  fa:	85 bb       	out	0x15, r24	; 21
+	PORTC=c;
+	PORTC+=5;
+  fc:	85 b3       	in	r24, 0x15	; 21
+  fe:	8b 5f       	subi	r24, 0xFB	; 251
+ 100:	85 bb       	out	0x15, r24	; 21
+ 102:	8a ef       	ldi	r24, 0xFA	; 250
+ 104:	90 e0       	ldi	r25, 0x00	; 0
+ 106:	01 97       	sbiw	r24, 0x01	; 1
+ 108:	f1 f7       	brne	.-4      	; 0x106 <senddata+0xc>
+	_delay_ms(1);
+	PORTC-=4;
+ 10a:	85 b3       	in	r24, 0x15	; 21
+ 10c:	84 50       	subi	r24, 0x04	; 4
+ 10e:	85 bb       	out	0x15, r24	; 21
+}
+ 110:	08 95       	ret
+
+00000112 <divdata>:
+	sendcmd(b&0xF0);//First 4 bits
+	sendcmd((b<<4)&0xF0);//Next 4
+	_delay_ms(1);
+}
+void divdata(int b)
+{
+ 112:	0f 93       	push	r16
+ 114:	1f 93       	push	r17
+ 116:	8c 01       	movw	r16, r24
+	senddata(b&0xF0);//First 4 bits
+ 118:	80 7f       	andi	r24, 0xF0	; 240
+ 11a:	90 70       	andi	r25, 0x00	; 0
+ 11c:	0e 94 7d 00 	call	0xfa	; 0xfa <senddata>
+	senddata((b<<4)&0xF0);//Next 4
+ 120:	94 e0       	ldi	r25, 0x04	; 4
+ 122:	00 0f       	add	r16, r16
+ 124:	11 1f       	adc	r17, r17
+ 126:	9a 95       	dec	r25
+ 128:	e1 f7       	brne	.-8      	; 0x122 <divdata+0x10>
+ 12a:	c8 01       	movw	r24, r16
+ 12c:	90 70       	andi	r25, 0x00	; 0
+ 12e:	0e 94 7d 00 	call	0xfa	; 0xfa <senddata>
+ 132:	8a ef       	ldi	r24, 0xFA	; 250
+ 134:	90 e0       	ldi	r25, 0x00	; 0
+ 136:	01 97       	sbiw	r24, 0x01	; 1
+ 138:	f1 f7       	brne	.-4      	; 0x136 <divdata+0x24>
+	_delay_ms(1);
+}
+ 13a:	1f 91       	pop	r17
+ 13c:	0f 91       	pop	r16
+ 13e:	08 95       	ret
+
+00000140 <disp_string>:
+	_delay_ms(1);
+	PORTC-=4;
+}
+
+void disp_string(char *str, int pos)
+{
+ 140:	0f 93       	push	r16
+ 142:	1f 93       	push	r17
+ 144:	cf 93       	push	r28
+ 146:	df 93       	push	r29
+ 148:	18 2f       	mov	r17, r24
+ 14a:	09 2f       	mov	r16, r25
+ 14c:	cb 01       	movw	r24, r22
+	int i=0;
+	divcmd(pos);
+ 14e:	0e 94 55 00 	call	0xaa	; 0xaa <divcmd>
+ 152:	21 2f       	mov	r18, r17
+ 154:	30 2f       	mov	r19, r16
+ 156:	c9 01       	movw	r24, r18
+ 158:	ec 01       	movw	r28, r24
+ 15a:	03 c0       	rjmp	.+6      	; 0x162 <disp_string+0x22>
+	while(str[i]!='\0')
+	{
+		divdata(str[i]);
+ 15c:	90 e0       	ldi	r25, 0x00	; 0
+ 15e:	0e 94 89 00 	call	0x112	; 0x112 <divdata>
+
+void disp_string(char *str, int pos)
+{
+	int i=0;
+	divcmd(pos);
+	while(str[i]!='\0')
+ 162:	89 91       	ld	r24, Y+
+ 164:	88 23       	and	r24, r24
+ 166:	d1 f7       	brne	.-12     	; 0x15c <disp_string+0x1c>
+	{
+		divdata(str[i]);
+		i++;
+	}
+
+}
+ 168:	df 91       	pop	r29
+ 16a:	cf 91       	pop	r28
+ 16c:	1f 91       	pop	r17
+ 16e:	0f 91       	pop	r16
+ 170:	08 95       	ret
+
+00000172 <disp_number>:
+
+void disp_number(unsigned int x,int y)
+{
+ 172:	cf 93       	push	r28
+ 174:	df 93       	push	r29
+ 176:	ec 01       	movw	r28, r24
+ 178:	cb 01       	movw	r24, r22
+	unsigned int i;
+	i=x;
+	divcmd(y);
+ 17a:	0e 94 55 00 	call	0xaa	; 0xaa <divcmd>
+	if(i<0)
+	{
+           i=i*-1;
+           }
+           
+	if(i==0)
+ 17e:	20 97       	sbiw	r28, 0x00	; 0
+ 180:	c9 f4       	brne	.+50     	; 0x1b4 <disp_number+0x42>
+	{
+		divdata(48);
+ 182:	80 e3       	ldi	r24, 0x30	; 48
+ 184:	90 e0       	ldi	r25, 0x00	; 0
+ 186:	0e 94 89 00 	call	0x112	; 0x112 <divdata>
+ 18a:	c0 e0       	ldi	r28, 0x00	; 0
+ 18c:	d0 e0       	ldi	r29, 0x00	; 0
+ 18e:	12 c0       	rjmp	.+36     	; 0x1b4 <disp_number+0x42>
+	}
+	while(i>0)
+	{
+		divcmd(0x04);
+ 190:	84 e0       	ldi	r24, 0x04	; 4
+ 192:	90 e0       	ldi	r25, 0x00	; 0
+ 194:	0e 94 55 00 	call	0xaa	; 0xaa <divcmd>
+		divdata((i%10)+48);
+ 198:	ce 01       	movw	r24, r28
+ 19a:	6a e0       	ldi	r22, 0x0A	; 10
+ 19c:	70 e0       	ldi	r23, 0x00	; 0
+ 19e:	0e 94 11 02 	call	0x422	; 0x422 <__udivmodhi4>
+ 1a2:	c0 96       	adiw	r24, 0x30	; 48
+ 1a4:	0e 94 89 00 	call	0x112	; 0x112 <divdata>
+		i=i/10;
+ 1a8:	ce 01       	movw	r24, r28
+ 1aa:	6a e0       	ldi	r22, 0x0A	; 10
+ 1ac:	70 e0       	ldi	r23, 0x00	; 0
+ 1ae:	0e 94 11 02 	call	0x422	; 0x422 <__udivmodhi4>
+ 1b2:	eb 01       	movw	r28, r22
+           
+	if(i==0)
+	{
+		divdata(48);
+	}
+	while(i>0)
+ 1b4:	20 97       	sbiw	r28, 0x00	; 0
+ 1b6:	61 f7       	brne	.-40     	; 0x190 <disp_number+0x1e>
+	{
+		divcmd(0x04);
+		divdata((i%10)+48);
+		i=i/10;
+	}
+}
+ 1b8:	df 91       	pop	r29
+ 1ba:	cf 91       	pop	r28
+ 1bc:	08 95       	ret
+
+000001be <select>:
+	}
+}
+
+
+void select(int a)
+{	
+ 1be:	81 e0       	ldi	r24, 0x01	; 1
+ 1c0:	90 e0       	ldi	r25, 0x00	; 0
+ 1c2:	0e 94 55 00 	call	0xaa	; 0xaa <divcmd>
+	divcmd(0x01);
+	disp_string("Welcome",0x80);
+ 1c6:	60 e8       	ldi	r22, 0x80	; 128
+ 1c8:	70 e0       	ldi	r23, 0x00	; 0
+ 1ca:	80 e6       	ldi	r24, 0x60	; 96
+ 1cc:	90 e0       	ldi	r25, 0x00	; 0
+ 1ce:	0e 94 a0 00 	call	0x140	; 0x140 <disp_string>
+ 1d2:	ff cf       	rjmp	.-2      	; 0x1d2 <select+0x14>
+
+000001d4 <main>:
+char *s1[]={"","Digital_Clock","Stop_Watch","LDM_Game","Start","Music"};//Inside app names
+void select(int);
+
+//Here starts our main part
+main()
+{
+ 1d4:	5f 92       	push	r5
+ 1d6:	6f 92       	push	r6
+ 1d8:	7f 92       	push	r7
+ 1da:	8f 92       	push	r8
+ 1dc:	9f 92       	push	r9
+ 1de:	af 92       	push	r10
+ 1e0:	bf 92       	push	r11
+ 1e2:	cf 92       	push	r12
+ 1e4:	df 92       	push	r13
+ 1e6:	ef 92       	push	r14
+ 1e8:	ff 92       	push	r15
+ 1ea:	0f 93       	push	r16
+ 1ec:	1f 93       	push	r17
+ 1ee:	cf 93       	push	r28
+ 1f0:	df 93       	push	r29
+	DDRD=0xF0;
+ 1f2:	80 ef       	ldi	r24, 0xF0	; 240
+ 1f4:	81 bb       	out	0x11, r24	; 17
+	DDRB=0;
+ 1f6:	17 ba       	out	0x17, r1	; 23
+	DDRC=0xFF;//PORTA is used for IR Sensors
+ 1f8:	8f ef       	ldi	r24, 0xFF	; 255
+ 1fa:	84 bb       	out	0x14, r24	; 20
+	lcdstr();// Initializing the Lcd display(lcdstr,divcmd,divdata,disp_string,disp_number -->Funtions related)
+ 1fc:	0e 94 6c 00 	call	0xd8	; 0xd8 <lcdstr>
+	divcmd(0x01);//Clearing the previous data on the lcd screen
+ 200:	81 e0       	ldi	r24, 0x01	; 1
+ 202:	90 e0       	ldi	r25, 0x00	; 0
+ 204:	0e 94 55 00 	call	0xaa	; 0xaa <divcmd>
+    can be achieved.
+*/
+void
+_delay_loop_1(uint8_t __count)
+{
+	__asm__ volatile (
+ 208:	06 ea       	ldi	r16, 0xA6	; 166
+ 20a:	90 2e       	mov	r9, r16
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+ 20c:	18 e9       	ldi	r17, 0x98	; 152
+ 20e:	e1 2e       	mov	r14, r17
+ 210:	1a e3       	ldi	r17, 0x3A	; 58
+ 212:	f1 2e       	mov	r15, r17
+	int k=0,i,j=0;// k used for changing the text on lcd only when input(gesture) is given..
+	while(1)
+	{
+		if(k==j)
+		{
+			divcmd(0x01);
+ 214:	b4 ec       	ldi	r27, 0xC4	; 196
+ 216:	ab 2e       	mov	r10, r27
+ 218:	b9 e0       	ldi	r27, 0x09	; 9
+ 21a:	bb 2e       	mov	r11, r27
+ 21c:	81 e0       	ldi	r24, 0x01	; 1
+ 21e:	90 e0       	ldi	r25, 0x00	; 0
+ 220:	0e 94 55 00 	call	0xaa	; 0xaa <divcmd>
+			disp_string(s[k],0x82);
+ 224:	62 e8       	ldi	r22, 0x82	; 130
+ 226:	70 e0       	ldi	r23, 0x00	; 0
+ 228:	80 91 9d 00 	lds	r24, 0x009D
+ 22c:	90 91 9e 00 	lds	r25, 0x009E
+ 230:	0e 94 a0 00 	call	0x140	; 0x140 <disp_string>
+			k=j;
+		}
+		k=0;j=2;
+		if(PINB==3)
+ 234:	86 b3       	in	r24, 0x16	; 22
+ 236:	83 30       	cpi	r24, 0x03	; 3
+ 238:	e9 f7       	brne	.-6      	; 0x234 <main+0x60>
+		{	
+			while(PINB==3);
+ 23a:	86 b3       	in	r24, 0x16	; 22
+ 23c:	83 30       	cpi	r24, 0x03	; 3
+ 23e:	e9 f3       	breq	.-6      	; 0x23a <main+0x66>
+ 240:	a1 e0       	ldi	r26, 0x01	; 1
+ 242:	ca 2e       	mov	r12, r26
+ 244:	d1 2c       	mov	r13, r1
+ 246:	82 e0       	ldi	r24, 0x02	; 2
+ 248:	90 e0       	ldi	r25, 0x00	; 0
+ 24a:	02 c0       	rjmp	.+4      	; 0x250 <main+0x7c>
+ 24c:	c6 01       	movw	r24, r12
+ 24e:	68 01       	movw	r12, r16
+			k++;
+			while(1)
+			{
+				if(k>3)
+ 250:	24 e0       	ldi	r18, 0x04	; 4
+ 252:	c2 16       	cp	r12, r18
+ 254:	d1 04       	cpc	r13, r1
+ 256:	24 f0       	brlt	.+8      	; 0x260 <main+0x8c>
+ 258:	f1 e0       	ldi	r31, 0x01	; 1
+ 25a:	cf 2e       	mov	r12, r31
+ 25c:	d1 2c       	mov	r13, r1
+ 25e:	06 c0       	rjmp	.+12     	; 0x26c <main+0x98>
+				 k=1;
+				if(k<1)
+ 260:	1c 14       	cp	r1, r12
+ 262:	1d 04       	cpc	r1, r13
+ 264:	1c f0       	brlt	.+6      	; 0x26c <main+0x98>
+ 266:	e3 e0       	ldi	r30, 0x03	; 3
+ 268:	ce 2e       	mov	r12, r30
+ 26a:	d1 2c       	mov	r13, r1
+				 k=3;
+				if(k!=j)
+ 26c:	c8 16       	cp	r12, r24
+ 26e:	d9 06       	cpc	r13, r25
+ 270:	a1 f0       	breq	.+40     	; 0x29a <main+0xc6>
+				{
+					divcmd(0x01);
+ 272:	81 e0       	ldi	r24, 0x01	; 1
+ 274:	90 e0       	ldi	r25, 0x00	; 0
+ 276:	0e 94 55 00 	call	0xaa	; 0xaa <divcmd>
+					disp_string(s[k],0x83);
+ 27a:	f6 01       	movw	r30, r12
+ 27c:	ee 0f       	add	r30, r30
+ 27e:	ff 1f       	adc	r31, r31
+ 280:	e3 56       	subi	r30, 0x63	; 99
+ 282:	ff 4f       	sbci	r31, 0xFF	; 255
+ 284:	63 e8       	ldi	r22, 0x83	; 131
+ 286:	70 e0       	ldi	r23, 0x00	; 0
+ 288:	80 81       	ld	r24, Z
+ 28a:	91 81       	ldd	r25, Z+1	; 0x01
+ 28c:	0e 94 a0 00 	call	0x140	; 0x140 <disp_string>
+					disp_number(k,0x80);
+ 290:	60 e8       	ldi	r22, 0x80	; 128
+ 292:	70 e0       	ldi	r23, 0x00	; 0
+ 294:	c6 01       	movw	r24, r12
+ 296:	0e 94 b9 00 	call	0x172	; 0x172 <disp_number>
+					j=k;
+				}
+				if(PINB==3)
+ 29a:	86 b3       	in	r24, 0x16	; 22
+ 29c:	83 30       	cpi	r24, 0x03	; 3
+ 29e:	09 f0       	breq	.+2      	; 0x2a2 <main+0xce>
+ 2a0:	6e c0       	rjmp	.+220    	; 0x37e <main+0x1aa>
+				{
+					while(PINB==3);
+ 2a2:	86 b3       	in	r24, 0x16	; 22
+ 2a4:	83 30       	cpi	r24, 0x03	; 3
+ 2a6:	e9 f3       	breq	.-6      	; 0x2a2 <main+0xce>
+ 2a8:	c5 01       	movw	r24, r10
+ 2aa:	01 97       	sbiw	r24, 0x01	; 1
+ 2ac:	f1 f7       	brne	.-4      	; 0x2aa <main+0xd6>
+					_delay_ms(10);
+					if(k==3)
+ 2ae:	83 e0       	ldi	r24, 0x03	; 3
+ 2b0:	c8 16       	cp	r12, r24
+ 2b2:	d1 04       	cpc	r13, r1
+ 2b4:	09 f4       	brne	.+2      	; 0x2b8 <main+0xe4>
+ 2b6:	b2 cf       	rjmp	.-156    	; 0x21c <main+0x48>
+ 2b8:	ee 24       	eor	r14, r14
+ 2ba:	ff 24       	eor	r15, r15
+						break;
+					}
+					int e=0,s=0;
+					while(1)
+					{
+					DDRD=0xF0;
+ 2bc:	60 ef       	ldi	r22, 0xF0	; 240
+ 2be:	56 2e       	mov	r5, r22
+ 2c0:	59 e1       	ldi	r21, 0x19	; 25
+ 2c2:	65 2e       	mov	r6, r21
+ 2c4:	71 2c       	mov	r7, r1
+				}
+				if(PINB==3)
+				{
+					while(PINB==3);
+					_delay_ms(10);
+					if(k==3)
+ 2c6:	40 e5       	ldi	r20, 0x50	; 80
+ 2c8:	84 2e       	mov	r8, r20
+ 2ca:	43 ec       	ldi	r20, 0xC3	; 195
+ 2cc:	94 2e       	mov	r9, r20
+ 2ce:	01 c0       	rjmp	.+2      	; 0x2d2 <main+0xfe>
+ 2d0:	75 01       	movw	r14, r10
+						break;
+					}
+					int e=0,s=0;
+					while(1)
+					{
+					DDRD=0xF0;
+ 2d2:	51 ba       	out	0x11, r5	; 17
+					int q=0,w=0;
+					divcmd(0x01);
+ 2d4:	81 e0       	ldi	r24, 0x01	; 1
+ 2d6:	90 e0       	ldi	r25, 0x00	; 0
+ 2d8:	0e 94 55 00 	call	0xaa	; 0xaa <divcmd>
+					disp_string("Enter PIN__",0x80);
+ 2dc:	60 e8       	ldi	r22, 0x80	; 128
+ 2de:	70 e0       	ldi	r23, 0x00	; 0
+ 2e0:	88 e6       	ldi	r24, 0x68	; 104
+ 2e2:	90 e0       	ldi	r25, 0x00	; 0
+ 2e4:	0e 94 a0 00 	call	0x140	; 0x140 <disp_string>
+ 2e8:	c0 e0       	ldi	r28, 0x00	; 0
+ 2ea:	d0 e0       	ldi	r29, 0x00	; 0
+ 2ec:	00 e0       	ldi	r16, 0x00	; 0
+ 2ee:	10 e0       	ldi	r17, 0x00	; 0
+					while(w<4)
+					{
+						while(PIND==s);
+ 2f0:	80 b3       	in	r24, 0x10	; 16
+ 2f2:	90 e0       	ldi	r25, 0x00	; 0
+ 2f4:	8e 15       	cp	r24, r14
+ 2f6:	9f 05       	cpc	r25, r15
+ 2f8:	d9 f3       	breq	.-10     	; 0x2f0 <main+0x11c>
+						e=PIND;
+ 2fa:	80 b3       	in	r24, 0x10	; 16
+ 2fc:	a8 2e       	mov	r10, r24
+ 2fe:	bb 24       	eor	r11, r11
+						if(w==0)
+ 300:	01 15       	cp	r16, r1
+ 302:	11 05       	cpc	r17, r1
+ 304:	41 f4       	brne	.+16     	; 0x316 <main+0x142>
+						{
+							divcmd(0x01);
+ 306:	81 e0       	ldi	r24, 0x01	; 1
+ 308:	90 e0       	ldi	r25, 0x00	; 0
+ 30a:	0e 94 55 00 	call	0xaa	; 0xaa <divcmd>
+							divcmd(0x80);
+ 30e:	80 e8       	ldi	r24, 0x80	; 128
+ 310:	90 e0       	ldi	r25, 0x00	; 0
+ 312:	0e 94 55 00 	call	0xaa	; 0xaa <divcmd>
+						}
+						s=e;
+						disp_number(e,0x80+w);
+ 316:	00 58       	subi	r16, 0x80	; 128
+ 318:	1f 4f       	sbci	r17, 0xFF	; 255
+ 31a:	b8 01       	movw	r22, r16
+ 31c:	c5 01       	movw	r24, r10
+ 31e:	0e 94 b9 00 	call	0x172	; 0x172 <disp_number>
+						q=q*10+e;
+ 322:	ce 01       	movw	r24, r28
+ 324:	33 e0       	ldi	r19, 0x03	; 3
+ 326:	88 0f       	add	r24, r24
+ 328:	99 1f       	adc	r25, r25
+ 32a:	3a 95       	dec	r19
+ 32c:	e1 f7       	brne	.-8      	; 0x326 <main+0x152>
+ 32e:	cc 0f       	add	r28, r28
+ 330:	dd 1f       	adc	r29, r29
+ 332:	c8 0f       	add	r28, r24
+ 334:	d9 1f       	adc	r29, r25
+ 336:	ca 0d       	add	r28, r10
+ 338:	db 1d       	adc	r29, r11
+						w++;
+ 33a:	0f 57       	subi	r16, 0x7F	; 127
+ 33c:	10 40       	sbci	r17, 0x00	; 0
+ 33e:	75 01       	movw	r14, r10
+					{
+					DDRD=0xF0;
+					int q=0,w=0;
+					divcmd(0x01);
+					disp_string("Enter PIN__",0x80);
+					while(w<4)
+ 340:	04 30       	cpi	r16, 0x04	; 4
+ 342:	11 05       	cpc	r17, r1
+ 344:	a9 f6       	brne	.-86     	; 0x2f0 <main+0x11c>
+						disp_number(e,0x80+w);
+						q=q*10+e;
+						w++;
+						
+					}
+					if(q==1234)
+ 346:	c2 5d       	subi	r28, 0xD2	; 210
+ 348:	d4 40       	sbci	r29, 0x04	; 4
+ 34a:	39 f4       	brne	.+14     	; 0x35a <main+0x186>
+					{
+						select(k);
+ 34c:	c6 01       	movw	r24, r12
+ 34e:	0e 94 df 00 	call	0x1be	; 0x1be <select>
+ 352:	c4 01       	movw	r24, r8
+ 354:	01 97       	sbiw	r24, 0x01	; 1
+ 356:	f1 f7       	brne	.-4      	; 0x354 <main+0x180>
+ 358:	bb cf       	rjmp	.-138    	; 0x2d0 <main+0xfc>
+						_delay_ms(200);
+						j++;
+					}
+					else
+					{
+						divcmd(0x01);
+ 35a:	81 e0       	ldi	r24, 0x01	; 1
+ 35c:	90 e0       	ldi	r25, 0x00	; 0
+ 35e:	0e 94 55 00 	call	0xaa	; 0xaa <divcmd>
+						disp_string("Incorrect",0x80);
+ 362:	60 e8       	ldi	r22, 0x80	; 128
+ 364:	70 e0       	ldi	r23, 0x00	; 0
+ 366:	84 e7       	ldi	r24, 0x74	; 116
+ 368:	90 e0       	ldi	r25, 0x00	; 0
+ 36a:	0e 94 a0 00 	call	0x140	; 0x140 <disp_string>
+ 36e:	88 e8       	ldi	r24, 0x88	; 136
+ 370:	93 e1       	ldi	r25, 0x13	; 19
+ 372:	f3 01       	movw	r30, r6
+ 374:	31 97       	sbiw	r30, 0x01	; 1
+ 376:	f1 f7       	brne	.-4      	; 0x374 <main+0x1a0>
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 378:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 37a:	d9 f7       	brne	.-10     	; 0x372 <main+0x19e>
+ 37c:	a9 cf       	rjmp	.-174    	; 0x2d0 <main+0xfc>
+					}
+
+				}
+						
+						
+				if(PINB==1)//For sliding the apps left wards
+ 37e:	86 b3       	in	r24, 0x16	; 22
+ 380:	81 30       	cpi	r24, 0x01	; 1
+ 382:	29 f5       	brne	.+74     	; 0x3ce <main+0x1fa>
+ 384:	20 e0       	ldi	r18, 0x00	; 0
+ 386:	30 e0       	ldi	r19, 0x00	; 0
+				{
+					i=0;
+					while(i<1000)// If takes more time to slide then not considering as a gesture
+					{
+						while(PINB==1);
+ 388:	86 b3       	in	r24, 0x16	; 22
+ 38a:	81 30       	cpi	r24, 0x01	; 1
+ 38c:	e9 f3       	breq	.-6      	; 0x388 <main+0x1b4>
+						if(PINB==2)
+ 38e:	86 b3       	in	r24, 0x16	; 22
+ 390:	82 30       	cpi	r24, 0x02	; 2
+ 392:	a1 f4       	brne	.+40     	; 0x3bc <main+0x1e8>
+						{
+							while(PINB==2);
+ 394:	86 b3       	in	r24, 0x16	; 22
+ 396:	82 30       	cpi	r24, 0x02	; 2
+ 398:	e9 f3       	breq	.-6      	; 0x394 <main+0x1c0>
+ 39a:	c0 e0       	ldi	r28, 0x00	; 0
+ 39c:	d0 e0       	ldi	r29, 0x00	; 0
+							for(int k=0;k<14;k++)
+							{
+								divcmd(0x1A);
+ 39e:	8a e1       	ldi	r24, 0x1A	; 26
+ 3a0:	90 e0       	ldi	r25, 0x00	; 0
+ 3a2:	0e 94 55 00 	call	0xaa	; 0xaa <divcmd>
+ 3a6:	c7 01       	movw	r24, r14
+ 3a8:	01 97       	sbiw	r24, 0x01	; 1
+ 3aa:	f1 f7       	brne	.-4      	; 0x3a8 <main+0x1d4>
+					{
+						while(PINB==1);
+						if(PINB==2)
+						{
+							while(PINB==2);
+							for(int k=0;k<14;k++)
+ 3ac:	21 96       	adiw	r28, 0x01	; 1
+ 3ae:	ce 30       	cpi	r28, 0x0E	; 14
+ 3b0:	d1 05       	cpc	r29, r1
+ 3b2:	a9 f7       	brne	.-22     	; 0x39e <main+0x1ca>
+							{
+								divcmd(0x1A);
+								_delay_ms(60);
+							}
+							k++;
+ 3b4:	86 01       	movw	r16, r12
+ 3b6:	0f 5f       	subi	r16, 0xFF	; 255
+ 3b8:	1f 4f       	sbci	r17, 0xFF	; 255
+ 3ba:	0a c0       	rjmp	.+20     	; 0x3d0 <main+0x1fc>
+							break;
+					
+						}
+						i++;
+ 3bc:	2f 5f       	subi	r18, 0xFF	; 255
+ 3be:	3f 4f       	sbci	r19, 0xFF	; 255
+    can be achieved.
+*/
+void
+_delay_loop_1(uint8_t __count)
+{
+	__asm__ volatile (
+ 3c0:	89 2d       	mov	r24, r9
+ 3c2:	8a 95       	dec	r24
+ 3c4:	f1 f7       	brne	.-4      	; 0x3c2 <main+0x1ee>
+						
+						
+				if(PINB==1)//For sliding the apps left wards
+				{
+					i=0;
+					while(i<1000)// If takes more time to slide then not considering as a gesture
+ 3c6:	83 e0       	ldi	r24, 0x03	; 3
+ 3c8:	28 3e       	cpi	r18, 0xE8	; 232
+ 3ca:	38 07       	cpc	r19, r24
+ 3cc:	e9 f6       	brne	.-70     	; 0x388 <main+0x1b4>
+ 3ce:	86 01       	movw	r16, r12
+						}
+						i++;
+						_delay_us(500);
+					}
+				}
+				if(PINB==2)
+ 3d0:	86 b3       	in	r24, 0x16	; 22
+ 3d2:	82 30       	cpi	r24, 0x02	; 2
+ 3d4:	09 f0       	breq	.+2      	; 0x3d8 <main+0x204>
+ 3d6:	3a cf       	rjmp	.-396    	; 0x24c <main+0x78>
+ 3d8:	20 e0       	ldi	r18, 0x00	; 0
+ 3da:	30 e0       	ldi	r19, 0x00	; 0
+				{
+					i=0;
+					while(i<1000)
+					{
+						while(PINB==2);
+ 3dc:	86 b3       	in	r24, 0x16	; 22
+ 3de:	82 30       	cpi	r24, 0x02	; 2
+ 3e0:	e9 f3       	breq	.-6      	; 0x3dc <main+0x208>
+						if(PINB==1)
+ 3e2:	86 b3       	in	r24, 0x16	; 22
+ 3e4:	81 30       	cpi	r24, 0x01	; 1
+ 3e6:	99 f4       	brne	.+38     	; 0x40e <main+0x23a>
+						{
+							while(PINB==1);
+ 3e8:	86 b3       	in	r24, 0x16	; 22
+ 3ea:	81 30       	cpi	r24, 0x01	; 1
+ 3ec:	e9 f3       	breq	.-6      	; 0x3e8 <main+0x214>
+ 3ee:	c0 e0       	ldi	r28, 0x00	; 0
+ 3f0:	d0 e0       	ldi	r29, 0x00	; 0
+							for(int k=0;k<14;k++)
+							{
+								divcmd(0x1C);
+ 3f2:	8c e1       	ldi	r24, 0x1C	; 28
+ 3f4:	90 e0       	ldi	r25, 0x00	; 0
+ 3f6:	0e 94 55 00 	call	0xaa	; 0xaa <divcmd>
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+ 3fa:	c7 01       	movw	r24, r14
+ 3fc:	01 97       	sbiw	r24, 0x01	; 1
+ 3fe:	f1 f7       	brne	.-4      	; 0x3fc <main+0x228>
+					{
+						while(PINB==2);
+						if(PINB==1)
+						{
+							while(PINB==1);
+							for(int k=0;k<14;k++)
+ 400:	21 96       	adiw	r28, 0x01	; 1
+ 402:	ce 30       	cpi	r28, 0x0E	; 14
+ 404:	d1 05       	cpc	r29, r1
+ 406:	a9 f7       	brne	.-22     	; 0x3f2 <main+0x21e>
+							{
+								divcmd(0x1C);
+								_delay_ms(60);
+							}
+							k--;
+ 408:	01 50       	subi	r16, 0x01	; 1
+ 40a:	10 40       	sbci	r17, 0x00	; 0
+ 40c:	1f cf       	rjmp	.-450    	; 0x24c <main+0x78>
+							break;
+					
+						}
+						i++;
+ 40e:	2f 5f       	subi	r18, 0xFF	; 255
+ 410:	3f 4f       	sbci	r19, 0xFF	; 255
+    can be achieved.
+*/
+void
+_delay_loop_1(uint8_t __count)
+{
+	__asm__ volatile (
+ 412:	89 2d       	mov	r24, r9
+ 414:	8a 95       	dec	r24
+ 416:	f1 f7       	brne	.-4      	; 0x414 <main+0x240>
+					}
+				}
+				if(PINB==2)
+				{
+					i=0;
+					while(i<1000)
+ 418:	83 e0       	ldi	r24, 0x03	; 3
+ 41a:	28 3e       	cpi	r18, 0xE8	; 232
+ 41c:	38 07       	cpc	r19, r24
+ 41e:	f1 f6       	brne	.-68     	; 0x3dc <main+0x208>
+ 420:	15 cf       	rjmp	.-470    	; 0x24c <main+0x78>
+
+00000422 <__udivmodhi4>:
+ 422:	aa 1b       	sub	r26, r26
+ 424:	bb 1b       	sub	r27, r27
+ 426:	51 e1       	ldi	r21, 0x11	; 17
+ 428:	07 c0       	rjmp	.+14     	; 0x438 <__udivmodhi4_ep>
+
+0000042a <__udivmodhi4_loop>:
+ 42a:	aa 1f       	adc	r26, r26
+ 42c:	bb 1f       	adc	r27, r27
+ 42e:	a6 17       	cp	r26, r22
+ 430:	b7 07       	cpc	r27, r23
+ 432:	10 f0       	brcs	.+4      	; 0x438 <__udivmodhi4_ep>
+ 434:	a6 1b       	sub	r26, r22
+ 436:	b7 0b       	sbc	r27, r23
+
+00000438 <__udivmodhi4_ep>:
+ 438:	88 1f       	adc	r24, r24
+ 43a:	99 1f       	adc	r25, r25
+ 43c:	5a 95       	dec	r21
+ 43e:	a9 f7       	brne	.-22     	; 0x42a <__udivmodhi4_loop>
+ 440:	80 95       	com	r24
+ 442:	90 95       	com	r25
+ 444:	bc 01       	movw	r22, r24
+ 446:	cd 01       	movw	r24, r26
+ 448:	08 95       	ret
+
+0000044a <_exit>:
+ 44a:	f8 94       	cli
+
+0000044c <__stop_program>:
+ 44c:	ff cf       	rjmp	.-2      	; 0x44c <__stop_program>

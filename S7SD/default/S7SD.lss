@@ -1,0 +1,483 @@
+
+S7SD.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000021c  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .debug_aranges 00000020  00000000  00000000  00000270  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  2 .debug_pubnames 00000023  00000000  00000000  00000290  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  3 .debug_info   000003ed  00000000  00000000  000002b3  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_abbrev 0000010c  00000000  00000000  000006a0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_line   00000309  00000000  00000000  000007ac  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_frame  00000030  00000000  00000000  00000ab8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_str    000000d0  00000000  00000000  00000ae8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_loc    00000280  00000000  00000000  00000bb8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d4 e0       	ldi	r29, 0x04	; 4
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ec e1       	ldi	r30, 0x1C	; 28
+  68:	f2 e0       	ldi	r31, 0x02	; 2
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <.do_copy_data_start>
+
+0000006c <.do_copy_data_loop>:
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+
+00000070 <.do_copy_data_start>:
+  70:	a0 36       	cpi	r26, 0x60	; 96
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <.do_copy_data_loop>
+
+00000076 <__do_clear_bss>:
+  76:	10 e0       	ldi	r17, 0x00	; 0
+  78:	a0 e6       	ldi	r26, 0x60	; 96
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a0 36       	cpi	r26, 0x60	; 96
+  82:	b1 07       	cpc	r27, r17
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 f9 00 	call	0x1f2	; 0x1f2 <main>
+  8a:	0c 94 0c 01 	jmp	0x218	; 0x218 <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__heap_end>
+
+00000092 <ssd>:
+
+	}
+}
+
+void ssd(int value)
+{
+  92:	84 30       	cpi	r24, 0x04	; 4
+  94:	91 05       	cpc	r25, r1
+  96:	09 f4       	brne	.+2      	; 0x9a <ssd+0x8>
+  98:	52 c0       	rjmp	.+164    	; 0x13e <ssd+0xac>
+  9a:	85 30       	cpi	r24, 0x05	; 5
+  9c:	91 05       	cpc	r25, r1
+  9e:	8c f4       	brge	.+34     	; 0xc2 <ssd+0x30>
+  a0:	81 30       	cpi	r24, 0x01	; 1
+  a2:	91 05       	cpc	r25, r1
+  a4:	29 f1       	breq	.+74     	; 0xf0 <ssd+0x5e>
+  a6:	82 30       	cpi	r24, 0x02	; 2
+  a8:	91 05       	cpc	r25, r1
+  aa:	24 f4       	brge	.+8      	; 0xb4 <ssd+0x22>
+  ac:	89 2b       	or	r24, r25
+  ae:	09 f4       	brne	.+2      	; 0xb2 <ssd+0x20>
+  b0:	92 c0       	rjmp	.+292    	; 0x1d6 <ssd+0x144>
+  b2:	08 95       	ret
+  b4:	82 30       	cpi	r24, 0x02	; 2
+  b6:	91 05       	cpc	r25, r1
+  b8:	41 f1       	breq	.+80     	; 0x10a <ssd+0x78>
+  ba:	03 97       	sbiw	r24, 0x03	; 3
+  bc:	09 f0       	breq	.+2      	; 0xc0 <ssd+0x2e>
+  be:	98 c0       	rjmp	.+304    	; 0x1f0 <ssd+0x15e>
+  c0:	31 c0       	rjmp	.+98     	; 0x124 <ssd+0x92>
+  c2:	87 30       	cpi	r24, 0x07	; 7
+  c4:	91 05       	cpc	r25, r1
+  c6:	09 f4       	brne	.+2      	; 0xca <ssd+0x38>
+  c8:	60 c0       	rjmp	.+192    	; 0x18a <ssd+0xf8>
+  ca:	88 30       	cpi	r24, 0x08	; 8
+  cc:	91 05       	cpc	r25, r1
+  ce:	44 f4       	brge	.+16     	; 0xe0 <ssd+0x4e>
+  d0:	85 30       	cpi	r24, 0x05	; 5
+  d2:	91 05       	cpc	r25, r1
+  d4:	09 f4       	brne	.+2      	; 0xd8 <ssd+0x46>
+  d6:	40 c0       	rjmp	.+128    	; 0x158 <ssd+0xc6>
+  d8:	06 97       	sbiw	r24, 0x06	; 6
+  da:	09 f0       	breq	.+2      	; 0xde <ssd+0x4c>
+  dc:	89 c0       	rjmp	.+274    	; 0x1f0 <ssd+0x15e>
+  de:	49 c0       	rjmp	.+146    	; 0x172 <ssd+0xe0>
+  e0:	88 30       	cpi	r24, 0x08	; 8
+  e2:	91 05       	cpc	r25, r1
+  e4:	09 f4       	brne	.+2      	; 0xe8 <ssd+0x56>
+  e6:	5e c0       	rjmp	.+188    	; 0x1a4 <ssd+0x112>
+  e8:	09 97       	sbiw	r24, 0x09	; 9
+  ea:	09 f0       	breq	.+2      	; 0xee <ssd+0x5c>
+  ec:	81 c0       	rjmp	.+258    	; 0x1f0 <ssd+0x15e>
+  ee:	66 c0       	rjmp	.+204    	; 0x1bc <ssd+0x12a>
+	switch (value)
+	{
+		case 1:
+		{
+			PORTB=~0b00011011;
+  f0:	84 ee       	ldi	r24, 0xE4	; 228
+  f2:	88 bb       	out	0x18, r24	; 24
+			PORTD=~0b00011111;
+  f4:	80 ee       	ldi	r24, 0xE0	; 224
+  f6:	82 bb       	out	0x12, r24	; 18
+  f8:	80 e2       	ldi	r24, 0x20	; 32
+  fa:	9e e4       	ldi	r25, 0x4E	; 78
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+  fc:	29 e1       	ldi	r18, 0x19	; 25
+  fe:	30 e0       	ldi	r19, 0x00	; 0
+ 100:	f9 01       	movw	r30, r18
+ 102:	31 97       	sbiw	r30, 0x01	; 1
+ 104:	f1 f7       	brne	.-4      	; 0x102 <ssd+0x70>
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 106:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 108:	d9 f7       	brne	.-10     	; 0x100 <ssd+0x6e>
+			_delay_ms(2000);
+		}
+		case 2:
+		{
+			PORTB=~19;
+ 10a:	8c ee       	ldi	r24, 0xEC	; 236
+ 10c:	88 bb       	out	0x18, r24	; 24
+			PORTD=~24;	_delay_ms(500);
+ 10e:	87 ee       	ldi	r24, 0xE7	; 231
+ 110:	82 bb       	out	0x12, r24	; 18
+ 112:	88 e8       	ldi	r24, 0x88	; 136
+ 114:	93 e1       	ldi	r25, 0x13	; 19
+ 116:	29 e1       	ldi	r18, 0x19	; 25
+ 118:	30 e0       	ldi	r19, 0x00	; 0
+ 11a:	f9 01       	movw	r30, r18
+ 11c:	31 97       	sbiw	r30, 0x01	; 1
+ 11e:	f1 f7       	brne	.-4      	; 0x11c <ssd+0x8a>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 120:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 122:	d9 f7       	brne	.-10     	; 0x11a <ssd+0x88>
+		}
+		case 3:
+		{
+			PORTB=~19;
+ 124:	8c ee       	ldi	r24, 0xEC	; 236
+ 126:	88 bb       	out	0x18, r24	; 24
+			PORTD=~10;	_delay_ms(500);
+ 128:	85 ef       	ldi	r24, 0xF5	; 245
+ 12a:	82 bb       	out	0x12, r24	; 18
+ 12c:	88 e8       	ldi	r24, 0x88	; 136
+ 12e:	93 e1       	ldi	r25, 0x13	; 19
+ 130:	29 e1       	ldi	r18, 0x19	; 25
+ 132:	30 e0       	ldi	r19, 0x00	; 0
+ 134:	f9 01       	movw	r30, r18
+ 136:	31 97       	sbiw	r30, 0x01	; 1
+ 138:	f1 f7       	brne	.-4      	; 0x136 <ssd+0xa4>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 13a:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 13c:	d9 f7       	brne	.-10     	; 0x134 <ssd+0xa2>
+		}
+		case 4:
+		{
+			PORTB=~24;
+ 13e:	87 ee       	ldi	r24, 0xE7	; 231
+ 140:	88 bb       	out	0x18, r24	; 24
+			PORTD=~2;	_delay_ms(500);
+ 142:	8d ef       	ldi	r24, 0xFD	; 253
+ 144:	82 bb       	out	0x12, r24	; 18
+ 146:	88 e8       	ldi	r24, 0x88	; 136
+ 148:	93 e1       	ldi	r25, 0x13	; 19
+ 14a:	29 e1       	ldi	r18, 0x19	; 25
+ 14c:	30 e0       	ldi	r19, 0x00	; 0
+ 14e:	f9 01       	movw	r30, r18
+ 150:	31 97       	sbiw	r30, 0x01	; 1
+ 152:	f1 f7       	brne	.-4      	; 0x150 <ssd+0xbe>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 154:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 156:	d9 f7       	brne	.-10     	; 0x14e <ssd+0xbc>
+		}
+		case 5:
+		{
+			PORTB=~26;
+ 158:	85 ee       	ldi	r24, 0xE5	; 229
+ 15a:	88 bb       	out	0x18, r24	; 24
+			PORTD=~24;	_delay_ms(500);
+ 15c:	87 ee       	ldi	r24, 0xE7	; 231
+ 15e:	82 bb       	out	0x12, r24	; 18
+ 160:	88 e8       	ldi	r24, 0x88	; 136
+ 162:	93 e1       	ldi	r25, 0x13	; 19
+ 164:	29 e1       	ldi	r18, 0x19	; 25
+ 166:	30 e0       	ldi	r19, 0x00	; 0
+ 168:	f9 01       	movw	r30, r18
+ 16a:	31 97       	sbiw	r30, 0x01	; 1
+ 16c:	f1 f7       	brne	.-4      	; 0x16a <ssd+0xd8>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 16e:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 170:	d9 f7       	brne	.-10     	; 0x168 <ssd+0xd6>
+		}
+		case 6:
+		{
+			PORTB=~26;
+ 172:	85 ee       	ldi	r24, 0xE5	; 229
+ 174:	88 bb       	out	0x18, r24	; 24
+			PORTD=~26;	_delay_ms(500);
+ 176:	82 bb       	out	0x12, r24	; 18
+ 178:	88 e8       	ldi	r24, 0x88	; 136
+ 17a:	93 e1       	ldi	r25, 0x13	; 19
+ 17c:	29 e1       	ldi	r18, 0x19	; 25
+ 17e:	30 e0       	ldi	r19, 0x00	; 0
+ 180:	f9 01       	movw	r30, r18
+ 182:	31 97       	sbiw	r30, 0x01	; 1
+ 184:	f1 f7       	brne	.-4      	; 0x182 <ssd+0xf0>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 186:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 188:	d9 f7       	brne	.-10     	; 0x180 <ssd+0xee>
+		}
+		case 7:
+		{
+			PORTB=~19;
+ 18a:	8c ee       	ldi	r24, 0xEC	; 236
+ 18c:	88 bb       	out	0x18, r24	; 24
+			PORTD=~2;	_delay_ms(500);
+ 18e:	8d ef       	ldi	r24, 0xFD	; 253
+ 190:	82 bb       	out	0x12, r24	; 18
+ 192:	88 e8       	ldi	r24, 0x88	; 136
+ 194:	93 e1       	ldi	r25, 0x13	; 19
+ 196:	29 e1       	ldi	r18, 0x19	; 25
+ 198:	30 e0       	ldi	r19, 0x00	; 0
+ 19a:	f9 01       	movw	r30, r18
+ 19c:	31 97       	sbiw	r30, 0x01	; 1
+ 19e:	f1 f7       	brne	.-4      	; 0x19c <ssd+0x10a>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 1a0:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 1a2:	d9 f7       	brne	.-10     	; 0x19a <ssd+0x108>
+		}
+		case 8:
+		{
+			PORTB=~31;
+ 1a4:	80 ee       	ldi	r24, 0xE0	; 224
+ 1a6:	88 bb       	out	0x18, r24	; 24
+			PORTD=~31;	_delay_ms(500);
+ 1a8:	82 bb       	out	0x12, r24	; 18
+ 1aa:	88 e8       	ldi	r24, 0x88	; 136
+ 1ac:	93 e1       	ldi	r25, 0x13	; 19
+ 1ae:	29 e1       	ldi	r18, 0x19	; 25
+ 1b0:	30 e0       	ldi	r19, 0x00	; 0
+ 1b2:	f9 01       	movw	r30, r18
+ 1b4:	31 97       	sbiw	r30, 0x01	; 1
+ 1b6:	f1 f7       	brne	.-4      	; 0x1b4 <ssd+0x122>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 1b8:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 1ba:	d9 f7       	brne	.-10     	; 0x1b2 <ssd+0x120>
+		}
+		case 9:
+		{
+			PORTB=~31;
+ 1bc:	80 ee       	ldi	r24, 0xE0	; 224
+ 1be:	88 bb       	out	0x18, r24	; 24
+			PORTD=~2;	_delay_ms(500);
+ 1c0:	8d ef       	ldi	r24, 0xFD	; 253
+ 1c2:	82 bb       	out	0x12, r24	; 18
+ 1c4:	88 e8       	ldi	r24, 0x88	; 136
+ 1c6:	93 e1       	ldi	r25, 0x13	; 19
+ 1c8:	29 e1       	ldi	r18, 0x19	; 25
+ 1ca:	30 e0       	ldi	r19, 0x00	; 0
+ 1cc:	f9 01       	movw	r30, r18
+ 1ce:	31 97       	sbiw	r30, 0x01	; 1
+ 1d0:	f1 f7       	brne	.-4      	; 0x1ce <ssd+0x13c>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 1d2:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 1d4:	d9 f7       	brne	.-10     	; 0x1cc <ssd+0x13a>
+		}
+		case 0:
+		{
+			PORTB=~1;
+ 1d6:	8e ef       	ldi	r24, 0xFE	; 254
+ 1d8:	88 bb       	out	0x18, r24	; 24
+			PORTD=~2;	_delay_ms(500);
+ 1da:	8d ef       	ldi	r24, 0xFD	; 253
+ 1dc:	82 bb       	out	0x12, r24	; 18
+ 1de:	88 e8       	ldi	r24, 0x88	; 136
+ 1e0:	93 e1       	ldi	r25, 0x13	; 19
+ 1e2:	29 e1       	ldi	r18, 0x19	; 25
+ 1e4:	30 e0       	ldi	r19, 0x00	; 0
+ 1e6:	f9 01       	movw	r30, r18
+ 1e8:	31 97       	sbiw	r30, 0x01	; 1
+ 1ea:	f1 f7       	brne	.-4      	; 0x1e8 <ssd+0x156>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 1ec:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 1ee:	d9 f7       	brne	.-10     	; 0x1e6 <ssd+0x154>
+ 1f0:	08 95       	ret
+
+000001f2 <main>:
+#include<avr/io.h>
+#include<util/delay.h>
+void ssd(int value);
+main()
+{
+ 1f2:	cf 93       	push	r28
+ 1f4:	df 93       	push	r29
+DDRB=0XFF;
+ 1f6:	8f ef       	ldi	r24, 0xFF	; 255
+ 1f8:	87 bb       	out	0x17, r24	; 23
+DDRD=0XFF;
+ 1fa:	81 bb       	out	0x11, r24	; 17
+ 1fc:	c1 e0       	ldi	r28, 0x01	; 1
+ 1fe:	d0 e0       	ldi	r29, 0x00	; 0
+int i;
+for(i=1;i<=9;i++)
+{
+	ssd(i);
+ 200:	ce 01       	movw	r24, r28
+ 202:	0e 94 49 00 	call	0x92	; 0x92 <ssd>
+main()
+{
+DDRB=0XFF;
+DDRD=0XFF;
+int i;
+for(i=1;i<=9;i++)
+ 206:	21 96       	adiw	r28, 0x01	; 1
+ 208:	ca 30       	cpi	r28, 0x0A	; 10
+ 20a:	d1 05       	cpc	r29, r1
+ 20c:	c9 f7       	brne	.-14     	; 0x200 <main+0xe>
+{
+	ssd(i);
+
+	}
+}
+ 20e:	80 e0       	ldi	r24, 0x00	; 0
+ 210:	90 e0       	ldi	r25, 0x00	; 0
+ 212:	df 91       	pop	r29
+ 214:	cf 91       	pop	r28
+ 216:	08 95       	ret
+
+00000218 <_exit>:
+ 218:	f8 94       	cli
+
+0000021a <__stop_program>:
+ 21a:	ff cf       	rjmp	.-2      	; 0x21a <__stop_program>

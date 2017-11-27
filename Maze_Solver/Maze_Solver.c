@@ -1,0 +1,50 @@
+#include<avr/io.h>
+#include<util/delay.h>
+main()
+{
+	DDRA=0xF8;
+	DDRB=0xFF;
+	
+	while(1)
+	{
+		if(PINA==0b00000110)
+		{
+			PORTB=5;
+			while(PINA==6)
+			{
+			}
+		}
+		if(PINA==0b00000100)
+		{
+			PORTB=5;
+			while(PINA!=5)
+			{
+				_delay_ms(1);
+			}
+			PORTB=4;
+			_delay_ms(2200);
+			PORTB=5;
+			while(PINA!=6)
+			{
+			_delay_ms(10);
+			}
+		}
+
+		if(PINA==0b00000010)
+		{
+			PORTB=5;
+			while(PINA!=3)
+			{
+				_delay_ms(10);
+			}
+			PORTB=1;
+			_delay_ms(2200);
+			PORTB=5;
+			while(PINA!=6)
+			{
+				_delay_ms(1);
+			}	
+		}
+				
+	}
+}

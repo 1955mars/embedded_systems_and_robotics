@@ -1,0 +1,42 @@
+#include<avr/io.h>
+#include<util/delay.h>
+main()
+{
+int x,y=1;
+DDRB=0xFF;
+DDRD=0xFF;
+while(1)
+{
+for(int i=0;i<=10;i++)
+{
+PORTB=0xFF;
+PORTD=0x7D;
+_delay_ms(10);
+PORTB=0x09;
+PORTD=0x81;
+_delay_ms(10);
+}
+//_delay_ms(1000);
+for(int i=0;i<=10;i++)
+{
+PORTB=0xFF;
+PORTD=0x01;
+}
+//_delay_ms(1000);
+/*while(1){
+for(x=0b00000001;x<=0b10000000;x<<=1)
+{
+PORTB=0;
+PORTD=x+y;
+y=y*x;
+_delay_ms(100);
+}
+/*for(x=0b10000000;x>=0b00000001;x>>=1)
+{
+PORTB=~x;
+PORTD=0b11111111;
+_delay_ms(100);
+}
+}*/
+}
+}

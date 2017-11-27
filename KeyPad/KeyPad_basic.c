@@ -1,0 +1,22 @@
+#include<avr/io.h>
+#include<util/delay.h>
+main()
+{
+	DDRB=0xFF;
+	DDRD=0xFF;
+	DDRA=0xF0;
+	PORTA=0x0F;
+	PORTD=0x0E;
+	while(1)
+	{
+		if(PINA==0x0E)
+		{
+			PORTB=1;
+			_delay_ms(10);
+		}
+		else
+		{
+			PORTB=0;
+			}
+	}
+}

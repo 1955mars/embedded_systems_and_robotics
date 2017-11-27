@@ -1,0 +1,35 @@
+#include<avr/io.h>
+#include<string.h>
+#include<util/delay.h>
+#include<mars/lcd.h>
+main()
+{
+	DDRD=0xFF;
+	lcdstr();
+	DDRA=0xFE;
+	DDRB=0xFF;
+	divcmd(0x01);
+	int rot=0,k=0;
+	while(1)
+	{
+		PORTB=1;
+		if(k==8)
+		{
+			rot++;
+			k=0;
+		}
+		divcmd(0x01);
+		disp_string("Rotations",0x81);
+		divcmd(0xc4);
+		divdata(rot+48);
+		_delay_ms(10);
+		if(PINA==1)
+		{
+			while(PINA==1)
+			{
+			}
+			k++;
+		}
+	}
+}
+	
